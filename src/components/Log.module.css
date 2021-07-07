@@ -1,0 +1,30 @@
+.wrapper {
+  text-align: center;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.list {
+  margin-bottom: 40px;
+  list-style: none;
+  counter-reset: my-awesome-counter;
+  padding: 0;
+}
+
+.list li {
+  counter-increment: my-awesome-counter;
+}
+
+.list li::before {
+  content: counter(my-awesome-counter) ". ";
+  color: #8ad0da;
+  font-weight: bold;
+}
+
+.loadMore {
+  font-size: 12px;
+  margin: 0 auto 20px;
+}

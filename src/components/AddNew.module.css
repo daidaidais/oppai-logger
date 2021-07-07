@@ -1,0 +1,18 @@
+.wrapper {
+  text-align: center;
+  margin: 60px 0;
+}
+
+.button {
+  padding: 20px 40px;
+  background-color: #f4bab9;
+  border-color: #f4bab9;
+  color: #303656;
+  font-weight: bold;
+}
+
+.button :active {
+  background-color: #f4bab9;
+  border-color: #f4bab9;
+  color: #303656;
+}
