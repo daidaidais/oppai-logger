@@ -67,8 +67,8 @@ const App = () => {
         </IfFirebaseAuthed>
         <IfFirebaseUnAuthed>
           {({ firebase }) => (
-            <div>
-              <p>You're not signed in </p>
+            <div className="signin">
+              <p>Let's log those oppai 🍼 </p>
               <Button
                 variant="primary"
                 onClick={() => {
