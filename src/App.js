@@ -6,6 +6,7 @@ import Log from "./components/Log";
 import AddNew from "./components/AddNew";
 import Footer from "./components/Footer";
 import Button from "react-bootstrap/Button";
+import { emails } from "./credentials";
 
 import {
   FirebaseAuthProvider,
@@ -22,31 +23,47 @@ const App = () => {
       <Header />
       <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
         <IfFirebaseAuthed>
-          {({ isSignedIn, user, providerId }) => (
-            <>
-              <div className="message">
-                <span>Hello {user.displayName} 🎉</span>
-                {/*
-                  <p>{`isSignedIn:${isSignedIn}`}</p>
-                  <p>{`name:${user.displayName}`}</p>
-                  <p>{`email:${user.email}`}</p>
-                  <p>{`providerId:${providerId}`}</p>
-                  */}
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="btn-signout"
-                  onClick={() => {
-                    firebase.app().auth().signOut();
-                  }}
-                >
-                  Sign out
-                </Button>
-              </div>
-              <AddNew firebaseConfig={firebaseConfig} />
-              <Log firebaseConfig={firebaseConfig} />
-            </>
-          )}
+          {({ isSignedIn, user, providerId }) => {
+            if (emails.includes(user.email)) {
+              return (
+                <>
+                  <div className="message">
+                    <span>Hello {user.displayName} 🎉</span>
+                    {/*
+                      <p>{`isSignedIn:${isSignedIn}`}</p>
+                      <p>{`name:${user.displayName}`}</p>
+                      <p>{`email:${user.email}`}</p>
+                      <p>{`providerId:${providerId}`}</p>
+                      */}
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="btn-signout"
+                      onClick={() => {
+                        firebase.app().auth().signOut();
+                      }}
+                    >
+                      Sign out
+                    </Button>
+                  </div>
+                  <AddNew firebaseConfig={firebaseConfig} />
+                  <Log firebaseConfig={firebaseConfig} />
+                </>
+              );
+            } else {
+              return (
+                <>
+                  <div className="message">
+                    Hi there 👋 <br />
+                    <br />
+                    It seems like you've wondered into a closed web app.
+                    Unfortunately you cannot use Oppai Logger at the moment,
+                    please come back again 😘
+                  </div>
+                </>
+              );
+            }
+          }}
         </IfFirebaseAuthed>
         <IfFirebaseUnAuthed>
           {({ firebase }) => (
