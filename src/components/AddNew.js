@@ -44,7 +44,7 @@ const AddNew = ({ firebaseConfig }) => {
                   });
                 }}
               >
-                授乳します！
+                授乳します
               </Button>
             )}
           </FirebaseDatabaseMutation>

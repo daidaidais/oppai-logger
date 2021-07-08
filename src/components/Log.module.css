@@ -16,12 +16,22 @@
 
 .list li {
   counter-increment: my-awesome-counter;
+  margin-bottom: 6px;
 }
 
 .list li::before {
-  content: counter(my-awesome-counter) ". ";
-  color: #8ad0da;
+  content: counter(my-awesome-counter);
   font-weight: bold;
+  background: #8ad0da;
+  border-radius: 50%;
+  color: white;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 12px;
 }
 
 .loadMore {

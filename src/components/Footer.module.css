@@ -6,8 +6,6 @@
   left: 0;
   bottom: 0;
   text-align: center;
-  background-color: #303656;
-  color: #fafafa;
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -17,5 +15,5 @@
 .link {
   margin-left: 5px;
   text-decoration: underline 1px;
-  color: #ffffff;
+  color: #303656;
 }
