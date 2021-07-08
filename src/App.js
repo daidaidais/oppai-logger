@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Container from "react-bootstrap/Container";
 import Header from "./components/Header";
 import Log from "./components/Log";
 import AddNew from "./components/AddNew";
 import Footer from "./components/Footer";
+import Spinner from "./components/Spinner";
 import Button from "react-bootstrap/Button";
 import { emails } from "./credentials";
 
@@ -18,6 +19,14 @@ import "firebase/auth";
 import { firebaseConfig } from "./credentials";
 
 const App = () => {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setReady(true);
+    }, 1000);
+  }, []);
+
   return (
     <Container fluid className="wrapper">
       <Header />
@@ -66,20 +75,24 @@ const App = () => {
           }}
         </IfFirebaseAuthed>
         <IfFirebaseUnAuthed>
-          {({ firebase }) => (
-            <div className="signin">
-              <p>Let's log those oppai 🍼 </p>
-              <Button
-                variant="primary"
-                onClick={() => {
-                  const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-                  firebase.auth().signInWithPopup(googleAuthProvider);
-                }}
-              >
-                Sign in with Google
-              </Button>
-            </div>
-          )}
+          {({ firebase }) => {
+            if (!ready) return <Spinner />;
+            else
+              return (
+                <div className="signin">
+                  <p>Let's log those oppai 🍼 </p>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+                      firebase.auth().signInWithPopup(googleAuthProvider);
+                    }}
+                  >
+                    Sign in with Google
+                  </Button>
+                </div>
+              );
+          }}
         </IfFirebaseUnAuthed>
       </FirebaseAuthProvider>
       <Footer />
