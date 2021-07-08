@@ -12,7 +12,7 @@ const Footer = () => {
         md={{ span: 8, offset: 2 }}
         lg={{ span: 8, offset: 2 }}
       >
-        Made with love by
+        Made with 🖤 by
         <a
           href="https://daisukeyukita.com"
           className={Styles.link}

@@ -28,10 +28,10 @@ const Log = ({ firebaseConfig }) => {
     <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
       <Row className={Styles.wrapper}>
         <Col
-          xs={{ span: 8, offset: 2 }}
-          sm={{ span: 8, offset: 2 }}
-          md={{ span: 8, offset: 2 }}
-          lg={{ span: 8, offset: 2 }}
+          xs={{ span: 10, offset: 1 }}
+          sm={{ span: 10, offset: 1 }}
+          md={{ span: 10, offset: 1 }}
+          lg={{ span: 10, offset: 1 }}
         >
           <FirebaseDatabaseNode
             path="oppai/"
