@@ -21,6 +21,7 @@
 
 # secret
 credentials.js
+back_up
 
 npm-debug.log*
 yarn-debug.log*
