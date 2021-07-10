@@ -12,7 +12,7 @@ import {
 } from "@react-firebase/database";
 
 const Log = ({ firebaseConfig }) => {
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(1);
 
   const convertTimestamp = (timestamp) => {
     const date = new Date(timestamp);
@@ -42,23 +42,17 @@ const Log = ({ firebaseConfig }) => {
               if (value === null || typeof value === "undefined") return null;
               const keys = Object.keys(value);
               const values = Object.values(value);
-              const regrouped = values.reduce((regrouped, item) => {
-                const group = regrouped[item.MYD] || [];
-                group.push(item.createdAt);
-                regrouped[item.MYD] = group;
-                return regrouped;
-              }, {});
-              const regroupedKeys = Object.keys(regrouped);
-              return regroupedKeys.reverse().map((keyVal, keyI) => (
+              return values.reverse().map((val, i) => (
                 <>
-                  <h3 className={Styles.title} key={keyI}>
-                    {keyVal.slice(0, 4)}年{keyVal.slice(4, 6)}月
-                    {keyVal.slice(6, 8)}日 （
-                    {regrouped[regroupedKeys[keyI]].length}回）
+                  <h3 className={Styles.title} key={keys.reverse()[i]}>
+                    {keys.reverse()[i].slice(0, 4)}年
+                    {keys.reverse()[i].slice(4, 6)}月
+                    {keys.reverse()[i].slice(6, 8)}日 （
+                    {Object.values(val).length}回）
                   </h3>
-                  <ol className={Styles.list}>
-                    {regrouped[regroupedKeys[keyI]].map((val, i) => (
-                      <li key={i}>{convertTimestamp(val)}</li>
+                  <ol className={Styles.list} key={i}>
+                    {Object.values(val).map((timeVal, timeI) => (
+                      <li key={timeI}>{convertTimestamp(timeVal.createdAt)}</li>
                     ))}
                   </ol>
                 </>
@@ -70,7 +64,7 @@ const Log = ({ firebaseConfig }) => {
             size="sm"
             className={Styles.loadMore}
             onClick={() => {
-              setLimit(limit + 10);
+              setLimit(limit + 1);
             }}
           >
             Load more

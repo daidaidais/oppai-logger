@@ -30,7 +30,7 @@ const AddNew = ({ firebaseConfig }) => {
           md={{ span: 8, offset: 2 }}
           lg={{ span: 8, offset: 2 }}
         >
-          <FirebaseDatabaseMutation type="push" path="oppai/">
+          <FirebaseDatabaseMutation type="push" path={`oppai/${getMYD()}`}>
             {({ runMutation }) => (
               <Button
                 variant="dark"
@@ -39,7 +39,7 @@ const AddNew = ({ firebaseConfig }) => {
                 className={Styles.button}
                 onClick={async () => {
                   await runMutation({
-                    MYD: getMYD(),
+                    //MYD: getMYD(),
                     createdAt: firebase.database.ServerValue.TIMESTAMP,
                   });
                 }}
