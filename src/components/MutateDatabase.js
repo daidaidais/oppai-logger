@@ -38,7 +38,7 @@ const MutateDatabase = ({ firebaseConfig, setClicked }) => {
           };
           setTimeout(() => {
             mutation();
-          }, 500);
+          }, 200);
           return <></>;
         }}
       </FirebaseDatabaseMutation>
