@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Styles from "./Log.module.css";
 import Button from "react-bootstrap/Button";
+import { uids } from "../credentials";
 
 import firebase from "firebase/app";
 import "firebase/database";
@@ -11,7 +12,7 @@ import {
   FirebaseDatabaseNode,
 } from "@react-firebase/database";
 
-const Log = ({ firebaseConfig }) => {
+const Log = ({ firebaseConfig, uid }) => {
   const [limit, setLimit] = useState(1);
 
   const convertTimestamp = (timestamp) => {
@@ -34,7 +35,7 @@ const Log = ({ firebaseConfig }) => {
           lg={{ span: 10, offset: 1 }}
         >
           <FirebaseDatabaseNode
-            path="oppai/"
+            path={uids.includes(uid) ? "oppai/" : `${uid}/`}
             limitToLast={limit}
             orderByValue={"createdAt"}
           >
@@ -43,8 +44,8 @@ const Log = ({ firebaseConfig }) => {
               const keys = Object.keys(value);
               const values = Object.values(value);
               return values.reverse().map((val, i) => (
-                <>
-                  <h3 className={Styles.title} key={keys.reverse()[i]}>
+                <div key={keys.reverse()[i]}>
+                  <h3 className={Styles.title}>
                     {keys.reverse()[i].slice(0, 4)}年
                     {keys.reverse()[i].slice(4, 6)}月
                     {keys.reverse()[i].slice(6, 8)}日 （
@@ -55,7 +56,7 @@ const Log = ({ firebaseConfig }) => {
                       <li key={timeI}>{convertTimestamp(timeVal.createdAt)}</li>
                     ))}
                   </ol>
-                </>
+                </div>
               ));
             }}
           </FirebaseDatabaseNode>
