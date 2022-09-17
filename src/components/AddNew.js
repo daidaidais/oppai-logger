@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Styles from "./AddNew.module.css";
 import MutateDatabase from "./MutateDatabase.js";
 
-const AddNew = ({ firebaseConfig }) => {
+const AddNew = ({ firebaseConfig, uid}) => {
   const [clicked, setClicked] = useState(false);
 
   return (
@@ -30,6 +30,7 @@ const AddNew = ({ firebaseConfig }) => {
         {clicked && (
           <MutateDatabase
             firebaseConfig={firebaseConfig}
+            uid={uid}
             setClicked={setClicked}
           />
         )}

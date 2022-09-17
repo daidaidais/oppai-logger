@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { uids } from "../credentials";
 
 import firebase from "firebase/app";
 import "firebase/database";
@@ -7,7 +8,7 @@ import {
   FirebaseDatabaseMutation,
 } from "@react-firebase/database";
 
-const MutateDatabase = ({ firebaseConfig, setClicked }) => {
+const MutateDatabase = ({ firebaseConfig, uid, setClicked }) => {
   useEffect(() => {
     //console.log(`MutateDatabse mounted`);
 
@@ -27,7 +28,7 @@ const MutateDatabase = ({ firebaseConfig, setClicked }) => {
 
   return (
     <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
-      <FirebaseDatabaseMutation type="push" path={`oppai/${getMYD()}`}>
+      <FirebaseDatabaseMutation type="push" path={uids.includes(uid) ? `oppai/${getMYD()}` : `${uid}/${getMYD()}`}>
         {({ runMutation }) => {
           const mutation = async () => {
             await runMutation({
