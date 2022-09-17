@@ -7,7 +7,6 @@ import AddNew from "./components/AddNew";
 import Footer from "./components/Footer";
 import Spinner from "./components/Spinner";
 import Button from "react-bootstrap/Button";
-import { emails } from "./credentials";
 
 import {
   FirebaseAuthProvider,
@@ -33,17 +32,15 @@ const App = () => {
       <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
         <IfFirebaseAuthed>
           {({ isSignedIn, user, providerId }) => {
-            if (emails.includes(user.email)) {
               return (
                 <>
                   <div className="message">
                     <span>Hello {user.displayName} 🎉</span>
-                    {/*
-                      <p>{`isSignedIn:${isSignedIn}`}</p>
+                      {/* <p>{`isSignedIn:${isSignedIn}`}</p>
                       <p>{`name:${user.displayName}`}</p>
+                      <p>{`id:${user.uid}`}</p>
                       <p>{`email:${user.email}`}</p>
-                      <p>{`providerId:${providerId}`}</p>
-                      */}
+                      <p>{`providerId:${providerId}`}</p> */}
                     <Button
                       variant="secondary"
                       size="sm"
@@ -55,23 +52,10 @@ const App = () => {
                       Sign out
                     </Button>
                   </div>
-                  <AddNew firebaseConfig={firebaseConfig} />
-                  <Log firebaseConfig={firebaseConfig} />
+                  <AddNew firebaseConfig={firebaseConfig} uid={user.uid}/>
+                  <Log firebaseConfig={firebaseConfig} uid={user.uid}/>
                 </>
               );
-            } else {
-              return (
-                <>
-                  <div className="message">
-                    Hi there 👋 <br />
-                    <br />
-                    It seems like you've wondered into a closed web app.
-                    Unfortunately you cannot use Oppai Logger at the moment,
-                    please come back again 😘
-                  </div>
-                </>
-              );
-            }
           }}
         </IfFirebaseAuthed>
         <IfFirebaseUnAuthed>
